@@ -27,3 +27,28 @@ typealias Request = (
     methodAndPayload: HTTPMethodAndPayload
 )
 
+// Requestで定義したmethodAndPayloadの型であるHTTPMethodAndPayloadを説明している部分
+enum HTTPMethodAndPayload {
+    /// GET メソッドの定義。
+    case get
+
+    /// POST メソッドの定義（必要になるまでは省略）。
+    // case post(payload: Data?)
+
+    /// メソッドの文字列表現。
+    var method: String {
+        switch self {
+        case .get:
+            return "GET"
+        }
+    }
+
+    /// ペイロード。ペイロードがないメソッドの場合は nil。
+    var body: Data? {
+        switch self {
+        case .get:
+            // GET はペイロードを取れないので nil。
+            return nil
+        }
+    }
+}
