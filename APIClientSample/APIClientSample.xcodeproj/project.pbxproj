@@ -14,6 +14,8 @@
 		FDB2D7972524B23C00D18D38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB2D7962524B23C00D18D38 /* Assets.xcassets */; };
 		FDB2D79A2524B23C00D18D38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB2D7982524B23C00D18D38 /* LaunchScreen.storyboard */; };
 		FDB2D7A52524B23C00D18D38 /* APIClientSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2D7A42524B23C00D18D38 /* APIClientSampleTests.swift */; };
+		FDB2D7B02525C61100D18D38 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2D7AF2525C61100D18D38 /* WebAPI.swift */; };
+		FDB2D7B12525C61100D18D38 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB2D7AF2525C61100D18D38 /* WebAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,7 @@
 		FDB2D7A02524B23C00D18D38 /* APIClientSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APIClientSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB2D7A42524B23C00D18D38 /* APIClientSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientSampleTests.swift; sourceTree = "<group>"; };
 		FDB2D7A62524B23C00D18D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDB2D7AF2525C61100D18D38 /* WebAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 				FDB2D78D2524B23300D18D38 /* AppDelegate.swift */,
 				FDB2D78F2524B23300D18D38 /* SceneDelegate.swift */,
 				FDB2D7912524B23300D18D38 /* ViewController.swift */,
+				FDB2D7AF2525C61100D18D38 /* WebAPI.swift */,
 				FDB2D7932524B23300D18D38 /* Main.storyboard */,
 				FDB2D7962524B23C00D18D38 /* Assets.xcassets */,
 				FDB2D7982524B23C00D18D38 /* LaunchScreen.storyboard */,
@@ -203,6 +207,7 @@
 				FDB2D7922524B23300D18D38 /* ViewController.swift in Sources */,
 				FDB2D78E2524B23300D18D38 /* AppDelegate.swift in Sources */,
 				FDB2D7902524B23300D18D38 /* SceneDelegate.swift in Sources */,
+				FDB2D7B02525C61100D18D38 /* WebAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDB2D7A52524B23C00D18D38 /* APIClientSampleTests.swift in Sources */,
+				FDB2D7B12525C61100D18D38 /* WebAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
