@@ -87,3 +87,27 @@ typealias Response = (
     payload: Data
 )
 
+enum HTTPStatus {
+    // HTTPステータスコードでは200にあたる
+    case ok
+    
+    // notFoundのHTTPステータスコードは404
+    case notFound
+    
+    // その他
+    case unsupported(code: Int)
+    
+    static func from(code: Int) -> HTTPStatus {
+        switch code {
+        case 200:
+            // 200はOKの意味
+            return .ok
+        case 404:
+            // 404はnotFoundの意味
+            return .notFound
+        default:
+            // それ以外はまだ対応しない
+            return .unsupported(code: code)
+        }
+    }
+}
