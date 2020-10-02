@@ -50,4 +50,16 @@ class APIClientSampleTests: XCTestCase {
         // この内容で API を呼び出す（注: WebAPI.call は後で定義する）。
         WebAPI.call(with: input)
     }
+    
+    func testResopnse() {
+        // 仮のレスポンスを定義する。
+        let response: Response = (
+            statusCode: .ok,
+            
+            // 読み取るべきヘッダーは特になし
+            headers: [:],
+            
+            payload: "this is a response text".data(using: .utf8)!
+        )
+    }
 }
