@@ -53,7 +53,28 @@ struct GitHubZen {
     // GitHubZenが左でなく右なのは、正しいとRightをかけた慣例。
     // Result型を使えばここいらなくなるかも？
     static func from(response: Response) -> Either<TransformError, GitHubZen> {
-        
+        switch response.statusCode {
+        case .ok:
+            // HTTPステータスがOKだったら、ペイロードの中身を確認する
+            // ZenAPIはUTF-8で符号化された文字列を返すはずのでDataをUTF-8 として解釈してみる
+            guard let string = String(data: response.payload, encoding: .utf8) else {
+                // もし、DataがUTF-8の文字列でなければ、誤って画像などを受信してしまったのかもしれない
+                // この場合は、malformedDataエラーを返す（エラーの型は左なので .left を使う）
+                return .left(.malformedData(debugInfo: "not UTF-8 string"))
+            }
+            
+            // もし、内容をUTF-8で符号化された文字列として読み取れたなら、
+            // その文字列からGitHubZenを作って返す（エラーではない型は右なので .right を使う）
+            return .right(GitHubZen(text: string))
+            
+        default:
+            // もし、HTTPステータスコードがOK以外であれば、エラーとして扱う
+            // たとえば、GitHub APIを呼び出しすぎたときは200OKではなく403Forbiddenが返るのでこちらにくる
+            return .left(.unexpectedStatusCode(
+                // エラーの内容がわかりやすいようにステータスコードを入れて返す
+                debugInfo: "\(response.statusCode)")
+            )
+        }
     }
     
     // GitHubZenAPIの変換で起きうるエラーの一覧
