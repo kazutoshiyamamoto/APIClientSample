@@ -61,5 +61,21 @@ class APIClientSampleTests: XCTestCase {
             
             payload: "this is a response text".data(using: .utf8)!
         )
+        
+        // GitHubZen.from関数を呼び出してみる
+        let errorOrZen = GitHubZen.from(response: response)
+        
+        // 結果は、エラーか禅なフレーズのどちらか
+        switch errorOrZen {
+        case let .left(error):
+            // 上の仮のレスポンスであれば、エラーにはならないはず
+            // そういう場合は、XCTFail という関数でこちらにきてしまったことをわかるようにする。
+            XCTFail("\(error)")
+            
+        case let .right(zen):
+            // 上の仮のレスポンスの禅なフレーズをちゃんと読み取れたかどうか検証したい
+            // そういう場合は、XCTAssertEqual という関数で内容があっているかどうかを検証する
+            XCTAssertEqual(zen.text, "this is a response text")
+        }
     }
 }
