@@ -12,6 +12,8 @@ import Foundation
 struct GitHubZen {
     let text: String
     
+    // レスポンスからわかりやすいオブジェクトへ変換する関数
+    static func from(response: Response) -> GitHubZen {
         
     }
 }
