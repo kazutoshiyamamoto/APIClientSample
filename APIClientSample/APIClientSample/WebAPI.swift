@@ -69,3 +69,9 @@ enum Output {
     case noResponse(ConnectionError)
 }
 
+// 通信エラー
+enum ConnectionError {
+    // データまたはレスポンスが存在しない場合のエラー。
+    case noDataOrNoResponse(debugInfo: String)
+}
+
