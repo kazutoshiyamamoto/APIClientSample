@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+// GitHub Zen APIの結果（現在のCodableにあたる？）
+struct GitHubZen {
+    let text: String
+    
+        
+    }
+}
