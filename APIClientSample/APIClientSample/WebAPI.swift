@@ -59,3 +59,13 @@ enum WebAPI {
         // TODO: もう少しインターフェースが固まったら実装する。
     }
 }
+
+// APIの出力をあらわすenum
+enum Output {
+    // レスポンスがある場合
+    case hasResponse(Response)
+    
+    // 通信エラーでレスポンスがない場合
+    case noResponse(ConnectionError)
+}
+
