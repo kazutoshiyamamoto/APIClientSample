@@ -75,3 +75,15 @@ enum ConnectionError {
     case noDataOrNoResponse(debugInfo: String)
 }
 
+// APIのレスポンス。構成要素は以下3つ。
+typealias Response = (
+    // レスポンスの意味をあらわすステータスコード
+    statusCode: HTTPStatus,
+    
+    // HTTPヘッダー
+    headers: [String: String],
+    
+    // レスポンスの本文
+    payload: Data
+)
+
