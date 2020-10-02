@@ -49,12 +49,19 @@ struct GitHubZen {
     // レスポンスからわかりやすいオブジェクトへと変換する関数。
     // ただし、サーバーがエラーを返してきた場合などは変換できないので、
     // その場合はエラーを返す。つまり、戻り値はエラーがわかりやすいオブジェクトになる。
-    // このような、「どちらか」を意味する Either という型で表現する。
+    // このような、「どちらか」を意味するEitherという型で表現する。
     // GitHubZenが左でなく右なのは、正しいとRightをかけた慣例。
     // Result型を使えばここいらなくなるかも？
     static func from(response: Response) -> Either<TransformError, GitHubZen> {
         
     }
+    
+    // GitHubZenAPIの変換で起きうるエラーの一覧
+    enum TransformError {
+        // HTTPステータスコードがOK以外だった場合のエラー
+        case unexpectedStatusCode(debugInfo: String)
         
+        // ペイロードが壊れた文字列だった場合のエラー
+        case malformedData(debugInfo: String)
     }
 }
