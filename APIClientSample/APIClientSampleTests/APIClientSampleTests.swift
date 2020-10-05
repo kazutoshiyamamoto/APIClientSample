@@ -79,3 +79,24 @@ class APIClientSampleTests: XCTestCase {
         }
     }
 }
+
+class ExampleAsyncTests: XCTestCase {
+    func testAsync() {
+        // XCTestExpectationオブジェクトを作成する。
+        // これを作成した時点で、動作確認のモードが非同期モードになる。
+        let expectation = self.expectation(description: "非同期に待つ")
+        
+        // 1秒経過したら、expectation.fulfill を実行する。
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+            expectation.fulfill()
+        }
+        
+        // 動作確認が完了するまで、10 秒待つ。
+        // 10 秒たっても expectation.fulfill が呼ばれなければ、
+        // 何かがおかしいので、わかりやすいエラーがでるようにしておく。
+        self.waitForExpectations(timeout: 10)
+        
+        // ここは expectation.fulfill が呼ばれるかタイムアウトするまで
+        // 実行されない。
+    }
+}
