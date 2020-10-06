@@ -78,6 +78,47 @@ class APIClientSampleTests: XCTestCase {
             XCTAssertEqual(zen.text, "this is a response text")
         }
     }
+    
+    func testRequestAndResopnse() {
+        let expectation = self.expectation(description: "API を待つ")
+        
+        // これまでと同じようにリクエストを作成する。
+        let input: Input = (
+            url: URL(string: "https://api.github.com/zen")!,
+            queries: [],
+            headers: [:],
+            methodAndPayload: .get
+        )
+        
+        // このリクエストで API を呼び出す。
+        // WebAPI.call の結果は、非同期なのでコールバックになるはず。
+        // また、コールバックの引数は Output 型（レスポンスありか通信エラー）になるはず。
+        // （注: WebAPI.call がコールバックを受け取れるようにするようにあとで修正する）
+        WebAPI.call(with: input) { output in
+            // サーバーからのレスポンスが帰ってきた。
+            
+            // Zen API のレスポンスの内容を確認する。
+            switch output {
+            case let .noResponse(connectionError):
+                // もし、通信エラーが起きていたらわかるようにしておく。
+                XCTFail("\(connectionError)")
+                
+                
+            case let .hasResponse(response):
+                // レスポンスがちゃんときていた場合は、わかりやすいオブジェクトへと
+                // 変換してみる。
+                let errorOrZen = GitHubZen.from(response: response)
+                
+                // 正しく呼び出せていれば GitHubZen が帰ってくるはずなので、
+                // 右側が nil ではなく値が入っていることを確認する。
+                XCTAssertNotNil(errorOrZen.right)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: 10)
+    }
 }
 
 class ExampleAsyncTests: XCTestCase {
