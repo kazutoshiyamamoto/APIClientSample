@@ -54,9 +54,29 @@ enum HTTPMethodAndPayload {
 }
 
 enum WebAPI {
-    // ビルドを通すために call 関数を用意しておく。
+    // コールバックつきのcall関数を用意
+    // コールバック関数に与えられる引数は、Output型（レスポンスか通信エラーのどちらか）
+    static func call(with input: Input, _ block: @escaping (Output) -> Void) {
+        // 実際にサーバーと通信するコードはまだはっきりしていないので、
+        // Timer を使って非同期なコード実行だけを再現する
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+            
+            // 仮のレスポンス
+            let response: Response = (
+                statusCode: .ok,
+                headers: [:],
+                payload: "this is a response text".data(using: .utf8)!
+            )
+            
+            // 仮のレスポンスでコールバックを呼び出す
+            block(.hasResponse(response))
+        }
+    }
+    
     static func call(with input: Input) {
-        // TODO: もう少しインターフェースが固まったら実装する。
+        self.call(with: input) { _ in
+            // NOTE: コールバックでは何もしない
+        }
     }
 }
 
