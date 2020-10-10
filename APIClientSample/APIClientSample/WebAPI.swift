@@ -78,6 +78,23 @@ enum WebAPI {
             // NOTE: コールバックでは何もしない
         }
     }
+    
+    // InputからURLRequestを生成
+    static private func createURLRequest(by input: Input) -> URLRequest {
+        // URLからURLRequeastを作成
+        var request = URLRequest(url: input.url)
+        
+        // HTTPメソッドを設定
+        request.httpMethod = input.methodAndPayload.method
+        
+        // リクエストの本文を設定
+        request.httpBody = input.methodAndPayload.body
+        
+        // HTTPヘッダを設定
+        request.allHTTPHeaderFields = input.headers
+        
+        return request
+    }
 }
 
 // APIの出力をあらわすenum
